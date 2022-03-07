@@ -1,0 +1,531 @@
+
+\documentclass{article}
+
+\title{MTH60904 FinalAssessment}
+\author{NG KOK TENG 0339917}
+\date{}
+
+\begin{document}
+
+\maketitle{}
+
+\section{Question 1}
+
+\begin{enumerate}
+
+\item Import the ChickWeight dataset into the RStudio and specify the variables in the ChickWeight dataset.\\
+
+Import the ChickWeight dataset into RStudio. Besides, there has also a load of each variable to according variables.\\
+<<q1a, echo=FALSE>>=
+options(warn=-1)
+ChickWeight <- datasets::ChickWeight
+Weight <- ChickWeight$weight
+Time <- ChickWeight$Time
+Chick <- ChickWeight$Chick
+Diet <- ChickWeight$Diet
+@
+
+Hence, there can view of the header name for each column in the ChickWeight dataset. Besides, there has shown, which is called "Weight", "Time", "Chick", and "Diet".\\
+<<q1b, echo=FALSE>>==
+data(ChickWeight) 
+names(ChickWeight)
+@
+
+There has used the summary method to generate the summary level descriptive statistic for the ChickWeight dataset. Therefore, the summary report will show the minimum, maximum, median, mean, first quantile, and third quantile for each column in the ChickWeight dataset.\\
+<<q1c, echo=FALSE>>==
+summary(ChickWeight) # Display the summary level
+@
+
+There has shown the first six rows of data records and the last six rows of data records in the ChickWeight dataset.\\
+<<q1d,echo=FALSE>>==
+head(ChickWeight)
+tail(ChickWeight)
+@
+
+\item Get the dimension of the ChickWeight dataset.\\
+
+Hence, there has shown the dimension of the ChickWeight dataset, there has saved 578 rows of data records and 4 variables of the headers. The four columns of the headers are "Weight", "Time", "Chick", and "Diet".\\
+
+<<q2,echo=FALSE>>==
+dim(ChickWeight)
+@
+
+\item Identify the type of ChickWeight dataset variables which is in columns.\\
+
+The below there has shown the data type for each column in the ChickWeight dataset, the datatype for the ChickWeight dataset is list. At the first, there has shown the data type for the column "Weight" is numeric, which could be seen as the integer as well. Besides, there has also shown the data type for the column of "Time", which is also numeric. In addition, the data type for the column of "Chick" is ordered factor, ordered factor is the data store in it that has been sorted. At the last, the data type for the column of "Diet" is a factor.\\
+
+<<q3a,echo=FALSE>>==
+data(ChickWeight)
+str(ChickWeight)
+@
+
+\item Develop a frequency distribution table for the attributes.\\
+
+There has shown the frequency table for each column in the ChickWeight dataset.\\
+
+<<q4a,echo=FALSE>>==
+weight<-c(Weight)
+time<-c(Time)
+chick<-c(Chick)
+diet<-c(Diet)
+table(weight)
+table(time)
+table(chick)
+table(diet)
+@
+
+\item Find the measures of central tendency of ChickWeight dataset features.\\
+\\
+The measures of central tendency are used to generate a statistic that could provide the central point (mean) of the data and the most frequent value (mode) in the dataset. The measure of central tendency demonstrates where the most frequent value in the distribution fall, there will also refer to the central point in the distribution. Hence, there should find the mean, mode, and median to perform the measures of central tendency.\\
+
+There have performed the measures of central tendency of the variable of "Weight", so there has to get the mean, mode, and median of the "Weight". There have got the mean of the variable "Weight" is 121.8183, and the mode for the "Weight" is 41. In addition, the median that has got is 103 in the ChickWeight dataset. Hence, there can be seen the central point for the variable of "Weight" is 121.8183, and the most frequent value is 41 in the ChickWeight dataset.\\
+<<q5a,echo=FALSE>>==
+meanweight=mean(Weight)
+meanweight
+getmode <- function(Weight){
+  uniq <- unique(Weight)
+  uniq[which.max(tabulate(match(Weight,uniq)))]
+}
+modeweight=getmode(Weight)
+modeweight
+medianweight=median(Weight)
+medianweight
+@
+
+There have performed the measures of central tendency of the variable of "Time", so there has to get the mean, mode, and median of the "Time". There have got the mean of the variable "Time" is 10.71799, and the mode of the variable is 0. In addition, the median that has got is 10 in the ChickWeight dataset. Hence, the can be seen the central point for the variable of "Time" is 10.71799, and the most frequent value is 0 in the ChickWeight dataset.\\
+<<q5b,echo=FALSE>>==
+meantime=mean(Time)
+meantime
+getmode <- function(Time){
+  uniq <- unique(Time)
+  uniq[which.max(tabulate(match(Time,uniq)))]
+}
+modetime=getmode(Time)
+modetime
+mediantime=median(Time)
+mediantime
+@
+
+There have performed the measures of the central tendency of the variable of "Diet", so there should get the mean, mode, and median for the variable of "Diet". There have got the mean of the variable "Diet" after calculating, which is 2.235294 that be seen as the central point for the variable of "Diet". Besides, the mode that has obtained is 1, 1 is the most frequent value in the variable of "Diet" as well. At the last, there has also got the median of the variable of "Diet", which is 2.\\
+<<q5c,echo=FALSE>>==
+meandiet=mean(as.numeric(Diet))
+meandiet
+getmode <- function(Diet){
+  uniq <- unique(Diet)
+  uniq[which.max(tabulate(match(Diet,uniq)))]
+}
+modediet=getmode(Diet)
+modediet
+mediandiet=median(as.numeric(Diet))
+mediandiet
+@
+
+There have performed the measures of central tendency of the variable of "Chick", so there should obtain and calculate the mean, mode, and median for the variable of "Chick". There have got the mean, which is 26.25952 that can be seen as the central point for the variable of "Chick". Besides, the mode that has obtained is 48, 48 is the most frequent value in the variable of "Chick". At the last, there has obtained the median which is 26.\\
+<<q5d,echo=FALSE>>==
+meanchick=mean(as.numeric(Chick))
+meanchick
+getmode <- function(Chick){
+  uniq <- unique(Chick)
+  uniq[which.max(tabulate(match(Chick,uniq)))]
+}
+modechick=getmode(Chick)
+modechick
+medianchick=median(as.numeric(Chick))
+medianchick
+@
+
+\item Find the measures of dispersion of ChickWeight data attributes.\\
+\\
+The purpose of measures of dispersion is used to describing the dissemination of the data in the dataset, or check the variance of the dataset around the central point. Hence in the measures of dispersion, there should find a range, variance, and standard deviation for each variable.\\
+
+
+Due to there want to perform the measures of dispersion, so there has got a range between the maximum and minimum value in the variable, variance, and standard deviation. Hence, there got the range for the variable of "Weight" is 338, and the variance obtained is 5051.223. There can also get the standard deviation from the variable of "Weight" is 71.07196.\\
+<<q6a, echo=FALSE>>==
+rangeweight = max(Weight) - min(Weight)
+print(rangeweight)
+varweight = var(Weight)
+varweight
+sdweight = sd(weight)
+sdweight
+@
+
+There has performed the measures of dispersion, there got the range between the maximum and minimum value of the variable of "Time", and there got a range is 21. Besides, there also got the variance value from the variable "Time" is 45.67597. There have also displayed the standard deviation from the variable of "Time", which is 6.7584.\\
+<<q6b, echo=FALSE>>==
+rangetime = max(Time) - min(Time)
+rangetime
+vartime = var(Time)
+vartime
+sdtime = sd(time)
+sdtime
+@
+
+There has performed the measures of dispersion, there got the range between the maximum and minimum value of the variable of "Diet", and there got a range is 3. Besides, there also got the variance value from the variable "Diet" is 1.35182. There have also displayed the standard deviation from the variable of "Diet", which is 1.162678.\\
+<<q6c, echo=FALSE>>==
+a = as.numeric(Diet)
+rangediet = max(a) - min(a)
+rangediet
+vardiet = var(a)
+vardiet
+sddiet = sd(a)
+sddiet
+@
+
+There has performed the measures of dispersion, there got the range between the maximum and minimum value of the variable of "Chick", and there got a range is 49. Besides, there also got the variance value from the variable "Chick" is 195.9117. There have also displayed the standard deviation from the variable of "Chick", which is 13.99685.\\
+<<q6d, echo=FALSE>>==
+b =as.numeric(Chick)
+rangechick = max(b) - min(b)
+rangechick
+varchick = var(b)
+varchick
+sdchick = sd(b)
+sdchick
+@
+
+\item Find the skewness of Chickweight data features.\\
+
+There has shown the skewness value of the variable of the "Weight", which is 0.9612781. That is a positive skewness for the variable of "Weight" in the ChickWeight dataset, and the skewness value is between 0.5 and 1 so that is moderately skewed. The meaning of the positive skewness is when the data of "Weight" in the right-hand side of the distribution is longer or fatter. Then the mean and median of "Weight" will greater than the mode. Hence, there can prove the histogram of the "Weight" is the right skew histogram from the skewness value which has been calculated. \\
+<<q7a,echo=FALSE>>==
+library(moments)
+skweight= skewness(Weight)
+skweight
+@
+
+Besides, there has also shown the skewness value of the variable of "Time" that has been calculated, which is -0.01752679. That is a negative skewness for the variable of "Time" in the ChickWeight dataset, and the skewness value is between 0.5 and -0.5 so that is fairly symmetrical. The meaning of negative skewness is when the data of "Time" on the left-hand-side of the distribution is longer or fatter than the right-hand side. Then the mean and median of "Time" will less than the mode of the variable "Time". Hence, there can prove the histogram of the "TIme" is the left skew histogram by using the skewness value that has been calculated.\\
+<<q7b,echo=FALSE>>==
+sktime= skewness(Time)
+sktime
+@
+
+In addition, there has shown the skewness value of the variable "Diet" has been calculated, which is 0.3155073. That is a positive skewness for the variable of "Diet" in the ChickWeight dataset, and the skewness value is between  0.5 and -0.5, so that is fairly symmetrical. The meaning of positive skewness value is when the data of "Diet" on the right-hand side of the distribution is longer and fatter. Then the mean and median of the "Diet" will great than the mode of the "Diet". Hence, there can prove by using the skewness value that has been calculated, the histogram for the "Diet" is a right skew histogram.\\
+<<q7c,echo=FALSE>>==
+skdiet= skewness(as.numeric(Diet))
+skdiet
+@
+
+At the last, there has also shown the skewness value of the variable of "Chick", the skewness value that has obtained is -0.001516816. That is a negative skewness for the variable of "Chick" in the ChickWeight dataset, and the skewness value is between 0.5 and -0.5, so that is fairly symmetrical. There can also use the skewness value that has obtained to prove the histogram of the "Chick" is a left skew histogram.\\
+<<q7d,echo=FALSE>>==
+skchick= skewness(as.numeric(Chick))
+skchick
+@
+
+\item Calculate correlations for each pair of attributes in Chickweight data.\\
+
+There has created the correlation table below, which is used to show the relationship between each variable that has been stored in the ChickWeight dataset. The correlation coefficient of the "Weight" and "Time" is 0.84, and the correlation coefficient of the "Weight" and "Chick" is 0.3. Besides, the correlation coefficient of the "Weight" and "Diet" is 0.21, and the correlation coefficient of "Time" and "Chick" is 0.04. In addition, the correlation coefficient of the "Time" and "Diet" is 0.02, and the correlation coefficient of "Chick" and "Diet" is 0.95.\\
+
+<<q8a,echo=FALSE,warning=FALSE,message=FALSE,results='hide'>>=
+ChickWeight$Diet<-as.numeric(Diet)
+ChickWeight$Chick<-as.numeric(Chick)
+q8 <- cor(ChickWeight[,1:4])
+print(q8)
+@
+
+<<q8b,echo=FALSE,warning=FALSE,message=FALSE,results='asis'>>=
+library(xtable)
+print(xtable(q8, caption="Correlation Matrix of ChickWeight Data"), caption.placement = "top",table.placement="!htp")
+@
+
+\item Visualize the ChickWeight data variables using appropriate graphs.\\
+
+<<q9a, echo=FALSE, message=FALSE,fig.allign="center">>==
+library(ggplot2)
+library(magrittr) 
+library(dplyr)
+
+firstgraph <-  filter(ChickWeight, (Time == 0) | (Time == 21)) %>%
+  group_by(Diet, Time) %>%
+  summarise(Mean = mean(weight),se = sd(weight)/(sqrt(n()))) 
+
+firstgraph$Time <- as.factor(firstgraph$Time) 
+ggplot(firstgraph, aes(x=Diet, y=Mean, fill=Time)) + 
+geom_bar(stat="identity", position=position_dodge()) +
+geom_errorbar(aes(ymin=Mean-se, ymax=Mean+se), width=.2,position=position_dodge(.9))
+@
+
+There has shown the bar plot graph above, which is used to describe the relationship between the mean of the variable "Weight" and the "Diet" that has fed for the chick. Obviously, there can view from the bar plot graph, when the chick is fed by the third (3) diet plan that could cause the chick to grow up faster than the other chick which is fed by other diet plan that has provided by the farmer. After that, there can view the lowest diet plan which is the first diet plan (1), which is the slowest grow up speed for the chick and inefficient when the chick is fed by diet plan 1. Besides, the fourth diet plan (4) is the second-highest diet plan to cause the chick to grow up faster. At the last, there can also view the second diet plan (2) is the second-lowest diet plan as well.\\
+
+<<q9b,echo=FALSE>>==
+ggplot(ChickWeight, aes(Time, weight, color = Diet, group = Chick)) +
+  geom_point() +
+  geom_line() +
+  geom_point(data = ChickWeight, color = "grey", alpha = .2) + 
+  geom_line(data = ChickWeight, color = "grey", alpha = .2) +
+  facet_wrap(~Diet) +
+  labs(x = 'Time (days)', y = 'Chick Weight (g)') +
+  theme(legend.position="none") 
+@
+
+There have shown the line graph above, that is used to describe the relationship between the column of "Time" and "Weight" and the chick is fed by the diet plan that has been provided by the farmer, the diet that has been provided by the farmer have diet plan 1, 2, 3, and 4. Hence, there can view diet plan 3 is the most efficient diet plan to make the chick grow up faster because the line has shown in diet plan 3 was almost achieve 400. Besides, there has also shown the second diet plan (2) is the second-highest in the fourth diet plan (4). The first diet plan (1) is the most inefficient diet plan to cause the chick to grow up faster in a short period of time. At the last, the second diet plan is the second-lowest diet plan as well that has shown in the graph above.\\
+
+<<q9c,echo=FALSE, message=FALSE,fig.allign="center">>==
+library("cowplot")
+ChickWeight$Chick<-factor(ChickWeight$Chick)
+ChickWeight$Diet<-factor(ChickWeight$Diet)
+cw_summary <-  ChickWeight %>%
+  group_by(Diet) %>%
+  summarise(Mean = mean(weight),
+            se = sd(weight)/(sqrt(n())))
+
+cw_summary2 <-  ChickWeight %>%
+  group_by(Diet,Time) %>%
+  summarise(Mean = mean(weight),
+            se = sd(weight)/(sqrt(n())))
+            
+jazzcup <- c("#80E0DF", "#31AEA6", "#3E88BC", "#783A9C", "#3A2C82")
+plotA <- ggplot(cw_summary, aes(x = Diet, y = Mean, fill = Diet)) + 
+  geom_bar(stat = "identity", position = position_dodge()) +
+  scale_fill_manual(values = jazzcup) +
+  geom_errorbar(aes(ymin = Mean - se, ymax = Mean + se), width = .2, position = position_dodge(.9)) +
+  theme(legend.position = "none")
+
+plotB <- ggplot(cw_summary2, aes(x = Time, y = Mean, color = Diet)) + 
+  geom_point(size = 2.5) +
+  scale_color_manual(values = jazzcup)
+combined_plot <- plot_grid(plotA, plotB, labels = c("A", "B"))
+
+combined_plot <- plot_grid(plotA, plotB, labels = c("A", "B"), align = "h", ncol = 2)
+
+combined_plot
+@
+At the above, there has displayed two graphs, such as bar plot and plot graph. There can view from the "Diet" graph, the third diet plan (3) is the highest and more efficient to cause the chick to grow up faster. Besides, the second-highest is the fourth diet plan (4), and the lowest and inefficient diet plan is the first diet plan (1) as well. At the last, there has also displayed the second-lowest of the diet plan that is the second diet plan (2).
+From the "Time" graph, there are consuming the same period of time to feed the chick by using a different type of diet plan such as diet plan 1, 2, 3, and 4. There can view from the plot graph of the variable of the x-axis is "Time", the most efficient diet plan is the third diet plan (3). Besides, the result is the same as the bar plot provided, the second-highest and efficient diet plan is the fourth diet plan (4). In addition, the second-lowest and inefficient diet plan is the second diet plan (2) as well. At the last, there can view from the graph, there has shown when the chick is fed by the first diet plan and there is consuming the same period of time with other diets plan, the grow up pace of the chick is the slowest and inefficient. Hence, the chick which has been fed by the first diet plan should change to other more efficient diet plans.\\
+
+<<q9d,echo=FALSE>>==
+names = as.factor(paste(unique(ChickWeight$Diet),"Diet"))
+#get the percentages
+percent=100*table(ChickWeight$Diet)/length(ChickWeight$Diet)
+pie(x=percent, label=paste(percent, "%"),  col=rainbow(length(names)), main="Percentage of Diet Plan for feeding to the chick" ) 
+
+legend("right",legend = names, fill = rainbow(length(names)), cex=0.8)
+@
+
+At the above, there have displayed the pie chart about the percentage of diet plan for feeding to the chick. The highest diet plan that has been used to feed the chick on the farm is the first diet plan (1), which is 38.062 percent. Besides, there have two second-highest diet plans that have been used to feed the chick in the farm, which is second and third diet plan (2,3) its percentage is 20.761 percent. At the last, the lowest used is the fourth diet plan 4, it is 20.415 percent. In the conclusion for the pie chart, the farmer is using the most inefficient diet plan to feed lots of chicks, the reason can know the first diet plan (1) is the most inefficient is there has visualized the graph before and get the result.\\
+
+
+\item Develop a prediction model and discuss the performance of the model critically.\\
+
+<<q10a,echo=FALSE,warning=FALSE,message=FALSE,results='hide'>>=
+
+firstgraph = lm(weight ~ Time, data = ChickWeight)
+
+print(firstgraph)
+@
+
+<<q10b,echo=FALSE,warning=FALSE,message=FALSE,results='asis'>>=
+print(xtable(firstgraph, caption="Linear Regression of Chick Data"), caption.placement = "top",table.placement="!htp")
+@
+
+<<q10d,echo=FALSE,warning=FALSE,message=FALSE,results='hide'>>=
+pre = lm(weight ~ Time, data = ChickWeight)
+print(pre)
+@
+
+<<q10f,echo =FALSE,fig.cap='Diet vs Weight line'>>=
+plot(weight ~ Time, data = ChickWeight,
+xlab = "Time", ylab = "Weight", pch = 20,
+cex = 2,
+col = "blue")
+abline(pre, lwd = 3, col = "darkorange")
+@
+
+<<q10g, echo=FALSE>>=
+pre = lm(weight ~ Time, data = ChickWeight)
+summary(pre)
+@
+
+The graph has shown above, that has used linear regression to plot the graph and perform the prediction feature. Obviously, there can view from the graph when the chick has been fed for a long time period, their weight will grow up too.\\
+
+
+<<q10h, echo=FALSE>>=
+predict(pre, newdata = data.frame(Time = c(6, 9, 15,21)))
+@
+
+The intercept for the dataset of ChickWeight, which has obtained the weight of the chick is 27.4674. The slope is the number of feet of weight for every increase of time. There can view from the summary of (firstgraph) to view the slope and intercept for the predictor variables. For the prediction model, the model has been used to predict the weight of the chick while the time is provided to predict is 6, 9, 15, and 21.\\
+
+\end{enumerate}
+
+\clearpage
+
+\section{Question 2}
+
+\begin{enumerate}
+
+\item Analyse the R built-in mtcars data and specify the variables\\
+
+Import the mtcars dataset into RStudio.\\
+<<q1a(1),echo=FALSE>>==
+mtcars <- datasets::mtcars
+@
+
+Hence, there can view of the header name for each variable in the mtcars dataset.\\
+
+<<q1b(1), echo=FALSE>>==
+data(mtcars) 
+names(mtcars) # Display the header name
+@
+
+There has used the summary method to generate the summary level descriptive statistic for the mtcars dataset. Therefore, the summary report will show the minimum, maximum, median, mean, first quantile, and third quantile for each variable in the mtcars dataset.\\
+<<q1c(1), echo=FALSE>>==
+summary(mtcars) # Display the summary level
+@
+
+There has shown the first six rows of data records and the last six rows of data records in the mtcars dataset.\\
+<<q1d(1),echo=FALSE>>==
+head(mtcars)
+tail(mtcars)
+@
+
+\item Find the dimension of the cars data.\\
+
+Hence, there has shown the dimension of the mtcars dataset, there has saved 32 rows of data records and 11 variables of the headers.\\
+<<q2(1),echo=FALSE>>==
+dim(mtcars)
+@
+
+\item Perform the exploratory data analysis, including descriptive statistics.\\
+
+There has displayed of the data type of each column in the mtcars dataset, there has also shown which kind of data type is the mtcars. Besides, all the variables in the mtcars are numeric, and the mtcars is dataframe as well.\\
+
+<<q3a(1),echo=FALSE>>==
+data(mtcars)
+str(mtcars)
+@
+
+There has created the correlation table below, there has displayed the relationship between each variable in the mtcars dataset.\\
+<<q3f(1),echo=FALSE,warning=FALSE,message=FALSE,results='hide'>>=
+q3 <- cor(mtcars[,1:11])
+print(q3)
+@
+
+<<q3g(1),echo=FALSE,warning=FALSE,message=FALSE,results='asis'>>=
+library(xtable)
+print(xtable(q3, caption="Correlation Matrix of mtcars Data"), caption.placement = "top",table.placement="!htp")
+@
+
+There has shown the frequency table for each variable in the mtcars dataset, due to the descriptive statistic has also included the frequency distribution.\\
+<<q3d(1), echo=FALSE>>==
+mpg<-c(mtcars$mpg)
+cyl<-c(mtcars$cyl)
+disp<-c(mtcars$disp)
+hp<-c(mtcars$hp)
+drat<-c(mtcars$drat)
+wt<-c(mtcars$wt)
+qsec<-c(mtcars$qsec)
+vs<-c(mtcars$vs)
+am<-c(mtcars$am)
+gear<-c(mtcars$gear)
+carb<-c(mtcars$carb)
+
+table(mpg)
+table(cyl)
+table(disp)
+table(hp)
+table(drat)
+table(wt)
+table(qsec)
+table(vs)
+table(am)
+table(gear)
+table(carb)
+@
+
+There has performed descriptive statistic, there have different kind of descriptive statistics such as measures of dispersion, measures of central tendency, and frequency distribution. Hence, there have found the mean, median, mode, standard deviation, range, and variance for each variable in the mtcars dataset.\\
+
+<<q3e(1),echo=FALSE>>==
+print(sapply(mtcars[,1:11], mean))
+print(sapply(mtcars[,1:11], median))
+print(sapply(mtcars[,1:11], getmode))
+print(sapply(mtcars[,1:11], sd))
+print((sapply(mtcars[,1:11], max))-(sapply(mtcars[,1:11], min)))
+print(sapply(mtcars[,1:11], var))
+@
+
+\item  Visualize the cars data features using appropriate graphs.\\
+
+<<q4a(1),echo=FALSE>>==
+names = as.factor(paste(unique(mtcars$carb),"carbs"))
+#get the percentages
+percent=100*table(mtcars$carb)/length(mtcars$carb)
+pie(x=percent, label=paste(percent, "%"),  col=rainbow(length(names)), main="Percentage of cars each number of carburators" ) 
+
+legend("right",legend = names, fill = rainbow(length(names)), cex=0.8)
+@
+There has shown the bar chart above, which is called "Percentage of cars each number of carburetors". There have displayed six different carburetors of cars. Obviously, 3 and 1 carburetors are the highest, and their percentage is 31.25 percent. Hence, 3 and 1 carburetors are the most frequent in the mtcars. Besides, the second-highest is the 4 carburetors, it is 21.875 percent. In addition, 2 carburetors are the second-lowest in the bar chart that has been plotted, its percentage is 9.375 percent. At the last, the 6 and 8 carburetors are the lowest in the bar chart, it is 3.125 percent as well.\\
+
+<<q4b(1),echo=FALSE>>==
+counts<-table(mtcars$cyl,mtcars$gear)
+barplot(counts,xlab="Gears",
+        main="Bar graph relationship between Gear and Cylinder",
+        col=c("yellow","pink","green"),
+        beside=TRUE, 
+        names.arg=c("3 Gears","4Gears","5 Gears"))
+
+legend("topright",c("4 cylinders","6 cylinders","8 cylinders"), fill=c("yellow","pink","green"))
+@
+
+At the above, there have displayed the bar graph which is called "Bar graph relationship between Gear and Cylinder". There have three types of cylinders that have been used in the mtcars dataset, such as 4, 6, and 8 cylinders. There can view cars that are using 8 cylinders, that are mostly using the 3 Gears. Besides, the frequency of the car which is using 4 and 6 cylinders that is using 3 Gears, which is only 1 and 2. In addition, there has also shown the car which is using 4 cylinders are mostly using 4 Gears that is 8 for 4 cylinders, and the car of 6 cylinders is 4 for using 4 Gears. The car which is implementing 8 cylinders there doesn't use 4 Gears as well. At the last, there can view from the bar graph, there only have a few of car is using 5 Gears.\\
+
+<<q4c(1),echo=FALSE>>==
+hpMpg <- mtcars[,c('hp','mpg')]
+plot(x = hpMpg$hp,y = hpMpg$mpg,
+     xlab = "Horse Power",
+     ylab = "Milage",
+     xlim = c(50,350),
+     ylim = c(10,35),        
+     main = "The plot chart relationship between Horsepower and Milage")
+@
+
+The chart which is called "The plot chart relationship between Horsepower and Milage", which is used to describe and view the relationship between car's horsepower and driving mileage. From the graph, there can view the car has low horsepower can drive for more distance (mileage), and the car has the high horsepower can only drive for a short distance as well. Besides, there can also view if the car has horsepower which is between 200 and 220, which is not suitable to implement in the car due to it got the lowest in the graph.\\
+
+
+<<q4d(1),echo=FALSE>>==
+wtMpg <- mtcars[,c('wt','mpg')]
+plot(x = wtMpg$wt,y = wtMpg$mpg,
+     xlab = "Weight", ylab = "Milage",
+     xlim = c(1,6),
+     ylim = c(10,35),        
+     main = "The plot chart relationship between Weight and Milage")
+@
+
+The chart that has been plotted which is called "The chart between Weight and Milage", that is used to describe the relationship between the car's weight and driving mileage. From the graph can view if the car has a heavyweight that will also cause the car to have a short distance driving mileage as well. Besides, the car has a lightweight that can make the car drive for more long-distance than the car which has a heavyweight.\\
+
+<<q4e(1),echo=FALSE>>==
+plot(mtcars$hp, mtcars$mpg, main = "Line graph relationship between Horsepower and Mileage ",
+     xlab = "Horsepower", ylab = "Mileage",
+     pch = 19, frame = FALSE)
+lines(lowess(mtcars$hp, mtcars$mpg), col = "blue")
+@
+The graph has been shown above, which is called "Line graph relationship Horsepower and Mileage", which is used to describe and view the relationship between a car's horsepower and driving mileage.  From the graph, there can view the car has low horsepower can drive for more distance (mileage), and the car has the high horsepower can only drive for a short distance as well. Besides, there can also view if the car has horsepower which is between 200 and 220, which is not suitable to implement in the car because the plot is too far away from the regression line.\\
+
+
+\item Develop a prediction model.\\
+
+There has used the Linear Regression to perform the prediction model. Besides, there are predict the relationship between the mileage and the weight of the cars. There can also view that is a weak linear regression.
+
+<<q5a(1),echo=FALSE>>==
+fit <- lm(mpg ~ wt, data = mtcars)
+summary(fit)
+@
+
+<<q5b(1),echo=FALSE>>==
+plot(mpg ~ wt, data = mtcars, col=2)
+abline(fit,col=3,lwd=2)
+bs <- round(coef(fit), 3) 
+lmlab <- paste0("mpg = ", bs[1],
+             ifelse(sign(bs[2])==1, " + ", " - "), abs(bs[2]), " wt ")
+mtext(lmlab, 3, line=-2) 
+@
+
+\item Evaluate the model and discuss the performance of the model critically.\\
+The intercept for the dataset of mtcars, which has obtained the mileage of the chick is 37.2851. The slope is the number of feet of mileage for every increase of time. There can view from the summary of (fit) to view the slope and intercept for the predictor variables.
+
+\item Estimate 5 points using the developed model.\\
+
+<<q7a(1),echo=TRUE>>==
+predict(fit, newdata = data.frame(wt = c(2.5, 3, 4, 4.5, 5)))
+@
+
+For the developed prediction model (Linear Regression), the model has been used to predict the mileage of the car can drive while the mileage is provided to predict the estimate 5 points, which are 2.5, 3, 4, 4.5, and 5.
+
+\end{enumerate}
+
+\end{document}
